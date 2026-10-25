@@ -1,0 +1,17 @@
+[
+  {
+    "file": "CPython-3.13.16-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/python/cpython/v3.13.16/LICENSE",
+    "sha256": "78b12c3a81360b357002334f0e70ea0e92eebf7a9b358805c03c48484945f3bb"
+  },
+  {
+    "file": "Caddy-2.11.7-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/caddyserver/caddy/v2.11.7/LICENSE",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+    "file": "Caddy-2.11.7-AUTHORS.txt",
+    "source": "https://raw.githubusercontent.com/caddyserver/caddy/v2.11.7/AUTHORS",
+    "sha256": "9d1c4cccf5d2f76af9c966c354011fc6c1db268a36f033bed58c5f0680efb7b5"
+  }
+]

@@ -1,0 +1,16 @@
+{$STRONGHOLD_SITE} {
+    request_body {
+        max_size 1MB
+    }
+    @multiplayer path /health /bridge/act2autochess/multiplayer/*
+    handle @multiplayer {
+        reverse_proxy backend:16680
+    }
+    handle {
+        respond 404
+    }
+    log {
+        output stdout
+        format json
+    }
+}

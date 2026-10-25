@@ -1,0 +1,4 @@
+services:
+  gateway:
+    ports:
+      - '${STRONGHOLD_LAN_ADDRESS:?explicit private LAN bind address required}:16680:8080'

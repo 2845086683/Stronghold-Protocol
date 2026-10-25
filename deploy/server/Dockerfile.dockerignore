@@ -1,0 +1,21 @@
+# Dockerfile-specific context whitelist. Never send a deployment instance,
+# database, participant credentials, operator secret, runtime, or logs to build.
+**
+!src/
+!src/StrongholdServer/
+!src/StrongholdServer/stronghold_server/
+!src/StrongholdServer/stronghold_server/*.py
+!src/StrongholdServer/third_party/
+!src/StrongholdServer/third_party/stronghold-protocol-reference/
+!src/StrongholdServer/third_party/stronghold-protocol-reference/*
+!server-data/
+!server-data/cn-autochess.json
+!server-data/cn-autochess-blackboard-repair.json
+!deploy/
+!deploy/server/
+!deploy/server/manage.py
+!deploy/server/README.md
+!deploy/server/THIRD_PARTY.md
+!deploy/server/runtime-requirements.json
+!deploy/server/licenses/
+!deploy/server/licenses/*

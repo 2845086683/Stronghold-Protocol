@@ -1,0 +1,58 @@
+name: stronghold-private
+services:
+  backend:
+    image: stronghold-private-backend:local
+    build:
+      context: ../..
+      dockerfile: deploy/server/Dockerfile
+      args:
+        PYTHON_IMAGE: ${STRONGHOLD_PYTHON_IMAGE:?configure a digest-pinned official Python image}
+    init: true
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    volumes:
+      - server_data:/data
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    networks: [private]
+    stop_grace_period: 40s
+    healthcheck:
+      test: [CMD, python, -I, -c, "import json,urllib.request; r=json.load(urllib.request.urlopen('http://127.0.0.1:16680/health',timeout=3)); assert r['ok'] is True"]
+      interval: 10s
+      timeout: 4s
+      start_period: 30s
+      retries: 3
+    logging:
+      driver: json-file
+      options: {max-size: 10m, max-file: '3'}
+  gateway:
+    image: ${STRONGHOLD_CADDY_IMAGE:?configure a digest-pinned official Caddy image}
+    restart: unless-stopped
+    read_only: true
+    security_opt: [no-new-privileges:true]
+    environment:
+      STRONGHOLD_SITE: ${STRONGHOLD_SITE:?choose a domain or explicit LAN mode}
+    depends_on:
+      backend: {condition: service_healthy}
+    volumes:
+      - ./caddy:/etc/caddy:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    networks: [private, edge]
+    logging:
+      driver: json-file
+      options: {max-size: 10m, max-file: '3'}
+networks:
+  private: {internal: true}
+  edge: {}
+volumes:
+  server_data:
+    name: stronghold-private-server-data
+  caddy_data:
+    name: stronghold-private-caddy-data
+  caddy_config:
+    name: stronghold-private-caddy-config

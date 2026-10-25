@@ -1,0 +1,42 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+
+# Runtime state, databases, logs and credentials
+local-server/
+instance/
+backups/
+captures/
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
+*.log
+operator.token
+cn-activity.ini
+*.token
+
+# Build and research output that must not be committed
+dist/
+build/
+out/
+research/
+docs/
+tests/
+client-data/
+server-data/
+*.zip.tmp
+*.tmp
+
+# Keep the release package tracked
+!release/*.zip
+!release/SHA256SUMS.txt
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
